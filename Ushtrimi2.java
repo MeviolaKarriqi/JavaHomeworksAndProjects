@@ -1,59 +1,67 @@
-//Implementoni klasën Student. Studenti ka emrin dhe numrin total të pikëve në quiz. Ndërtoni
-//konstruktorin dhe metodat getName (), addQuiz(int score), getTotalScore () dhe
-//getAverageScore(). Ju duhet të ruani dhe numrin e quiz-eve qe ka kryer studenti. Testoni klasën
-//Student.
-package com.com.seminar9;
+//Ndërtoni klasën Punonjës që ka një emër dhe pagë. Ndërtoni klasën Menaxher që trashëgon nga
+//klasa Punonjës. Shtoni variablën e instancës departament të tipit String. Ndërtoni metodën
+//toString që do të afishojë emrin e menaxherit, departamentin dhe pagën. Ndërtoni klasën
+//Ekzekutiv që do të trashëgojë nga klasa Menaxher. Ndërtoni metodën toString në të gjitha klasat.
+//Ndërtoni klasën testuese.
+package com.seminari10;
 
 import java.util.Scanner;
 
-class Student{
-    private String emriStudentit;
-    private int piketEQuiz;
-    private int nrIQuiz;
-    Student(String emri){
-        this.emriStudentit = emri;
-        this.piketEQuiz = 0;
-        nrIQuiz = 0;
+class Punonjes{
+    private String emri;
+    private double pagesa;
+
+    public String getEmri(){
+        return emri;
     }
-    public String merrEmrin(){
-        return emriStudentit;
+
+    public void setEmri(String emr){
+        this.emri = emr;
     }
-    public void shtoQuiz(int piket){
-        this.piketEQuiz+=piket;
-        nrIQuiz++;
+
+    public Double getPagesa(){
+        return pagesa;
     }
-    public int shumaEPikeve(){
-        return piketEQuiz;
+
+    public void setPagesa(Double pag){
+        this.pagesa = pag;
     }
-    public double mesatarjaEPikeve(){
-        return (double) piketEQuiz/nrIQuiz;
+
+    public String toString() {
+        return ("Emri "+this.emri + " dhe pagesa " + this.pagesa + " $");
+    }
+}
+
+class Menaxher extends Punonjes{
+    private String departamenti;
+
+    public String getDepartamenti(){
+        return departamenti;
+    }
+
+    public void setDepartamenti(String dep){
+        this.departamenti = dep;
+    }
+
+    public String toString(){
+        return ("Departamenti "+ this.departamenti +" per punojesin "+ super.toString() );
     }
 }
 
 public class Ushtrimi2 {
-    public static void main(String[] args) {
+    public static void main (String [] args){
         Scanner in = new Scanner(System.in);
-        System.out.println("Vendosni emrin e studentit : ");
+        Menaxher men  = new Menaxher();
+        System.out.println("Vendosi emrin e punonjesit : ");
         String emer = in.next();
-        Student student = new Student(emer);
-        System.out.println("Vendosni piket qe u fituan ne quizin e pare : ");
-        int quiz1 = in.nextInt();
-        student.shtoQuiz(quiz1);
-        System.out.println("Vendosni piket qe u fituan ne quizin e dyte : ");
-        int quiz2 = in.nextInt();
-        student.shtoQuiz(quiz2);
-        System.out.println("Vendosni piket qe u fituan ne quizin e trete : ");
-        int quiz3 = in.nextInt();
-        student.shtoQuiz(quiz3);
-        System.out.println("Vendosni piket qe u fituan ne quizin e katert : ");
-        int quiz4 = in.nextInt();
-        student.shtoQuiz(quiz4);
-        System.out.println("Vendosni piket qe u fituan ne quizin e peste : ");
-        int quiz5 = in.nextInt();
-        student.shtoQuiz(quiz5);
-        System.out.println("Student : "+student.merrEmrin());
-        System.out.println("Piket totale te fituara ne quize : "+student.shumaEPikeve());
-        System.out.println("Mesatarja e pikeve te fituara ne quize : "+student.mesatarjaEPikeve());
-
+        System.out.println("Vendosi pagen e punonjesit : ");
+        Double pagesa = in.nextDouble();
+        System.out.println("Vendosi departamentin e punonjesit : ");
+        String departamenti = in.next();
+        men.setEmri(emer);
+        men.setPagesa(pagesa);
+        men.setDepartamenti(departamenti);
+        System.out.println("Informacioni per punonjesin : ");
+        System.out.println(men);
     }
 }

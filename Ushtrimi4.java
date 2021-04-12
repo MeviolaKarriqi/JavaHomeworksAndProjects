@@ -1,52 +1,54 @@
-//Implementoni një klasë Product. Një produkt ka një emër dhe një çmim, për shembull neë Product
-//(“Tost”, 29.95). Ndërtoni metodat getName, getPrice dhe reducePrice. Ndërtoni një program
-//ProductPrinter i cili do afishojë emrin dhe çmimin e dy produkteve, do të reduktojë çmimin e tyre
-//me 5$ dhe do të afishojë përsëri çmimet e tyre.
-package com.com.seminar9;
+//Supozoni se kërkohet që të modeloni klasat Studentë dhe Lektor. Superklasa Person do të ruajë
+//karakteristikat e përgjithshme si emër, adresë dhe subklasa Student dhe Lektor karakteristikat e
+//vecanta. Për studentët duhet të ruhen lendet e ndjekura dhe notat respektive, të mund të shtohet
+//një lënde sëbashku me notën, të afishohen të gjitha lëndët e ndjekura dhe nota mesatare.
+//Supozohet se një student nuk do të ketë më shumë se 30 lëndë të ndjekura. Për Lektorin duhet të
+//ruhen lëndët e dhëna, dhe të kemi mundësi të shtojmë ose heqim një lëndë nga lëndët qe jep
+//Lektori. Supozohet që një lector nuk jep më shumë se 5 kurse.
 
-import java.util.Scanner;
-
-class Produkt{
-    private String emerProdukt;
-    private double cmimiProdukt;
-    Produkt(String emerProdukt, double cmimiProdukt){
-        this.emerProdukt = emerProdukt;
-        this.cmimiProdukt = cmimiProdukt;
+package com.seminari10;
+import java.util.ArrayList;
+class Person{
+    private String emri;
+    private String adresa;
+    Person(String emr, String adr){
+        this.emri = emr;
+        this.adresa = adr;
+    }
+    public String getEmri(){
+        return emri;
+    }
+    public void setEmri(String emrii){
+        this.emri = emrii;
+    }
+    public String getAdresa(){
+        return adresa;
+    }
+    public void setAdresa(String adresaa){
+        this.adresa = adresaa;
     }
 
-    public String merrEmerProdukti(){
-        return emerProdukt;
+    public String toString(){
+        return("Emri i personit : " + this.emri + " \nAdresa e personit : " + this.adresa);
     }
-    public double merrCmimProdukti(){
-        return cmimiProdukt;
+}
+
+class Studente extends Person{
+    private int nrLendeve;
+    private String [] lendet;
+    private int [] notat;
+
+
+    Studente(String emr, String adr) {
+        super(emr, adr);
     }
-    public double reduktoCmimin(double cmim){
-        this.cmimiProdukt = cmimiProdukt - 5;
-        return cmimiProdukt;
+}
+
+class Lektor extends Person{
+
+    Lektor(String emr, String adr) {
+        super(emr, adr);
     }
 }
 public class Ushtrimi4 {
-    public static void main(String[] args) {
-        Scanner in  = new Scanner(System.in);
-
-        System.out.println("Vendos e emrin e produktit te pare : ");
-        String emri = in.next();
-        System.out.println("Vendos e cmimin e produktit te pare : ");
-        double cmimi = in.nextDouble();
-
-        System.out.println("Vendos e emrin e produtit te dyte : ");
-        String emri2 = in.next();
-        System.out.println("Vendos e cmimin e produtit te dyte : ");
-        int cmimi2 = in.nextInt();
-
-        Produkt produkti1 = new Produkt(emri,cmimi);
-        System.out.println("Emri i produktit te pare : "+produkti1.merrEmerProdukti());
-        System.out.println("Cmimi i produktit te pare : "+produkti1.merrCmimProdukti()+" $");
-        System.out.println("Cmimi i reduktuar i produktit te pare : "+produkti1.reduktoCmimin(cmimi)+" $");
-
-        Produkt produkti2 = new Produkt(emri2,cmimi2);
-        System.out.println("\n\n\nEmri i produktit te dyte : "+produkti2.merrEmerProdukti());
-        System.out.println("Cmimi i produktit te dyte : "+produkti2.merrCmimProdukti()+" $");
-        System.out.println("Cmimi i reduktuar i produktit te dyte : "+produkti2.reduktoCmimin(cmimi2)+" $");
-    }
 }

@@ -1,37 +1,57 @@
-//Implementoni një klasë Population e cili simulon rritjen e popullsisë. Konstruktori merr numrin e
-//popullsisë fillestare. Ndërtoni një metodë e cila simulon rritjen e popullsisë duke e dyfishuar atë,
-//një metodë e cila e zvogëlon popullsinë me 10% dhe një metodë e cila kthen numrin aktual të
-//popullsisë. Ndërtoni programin i cili afishon dy herë numrin e popullsisë pas rritjes dhe zvogëlimit
-//të saj dy herë.
-package com.com.seminar9;
+//Ndërtoni klasën abstrakte Forma që do të ruajë nr e brinjëve. Ndërtoni konstruktorin me
+//parametra, metodën merrNumërbrinjësh dhe metodat abstrakte merrSipërfaqe(),
+//merrPerimetër(). Ndërtoni klasën Drejtkëndësh që trashëgon nga klasa Forma. Klasa Drejtkëndësh
+//do të ruajë gjatësi dhe gjerësi të drejtkëndëshit. Ndërtoni konstruktorin e dhe metodat përkatëse
+//të klasës Drejtkëndësh.
+package com.seminari10;
 
-import java.util.Scanner;
+abstract class Forma {
+    private double lartesia;
+    private double gjeresia;
 
-class Popullsia{
-    private int persona;
-    Popullsia (int persona){
-        this.persona = persona;
+    public void setVlerat(double lartesia, double gjeresia) {
+        this.lartesia = lartesia;
+        this.gjeresia = gjeresia;
     }
-    public int nrAktual(){
-        return persona;
+
+    public double getLartesia() {
+        return lartesia;
     }
-    public int rritNr(){
-        this.persona = persona * 2;
-        return persona;
+
+    public double getGjeresia() {
+        return gjeresia;
     }
-    public int zvogeloNr(int popullsi){
-        this.persona = (int) (popullsi - popullsi*0.1);
-        return persona;
+
+    public abstract double getSip();
+}
+class Drejtkendeshi extends Forma {
+    public double getSip(){
+        return getLartesia() * getGjeresia();
+    }
+}
+class Trekendeshi extends Forma {
+    public double getSip(){
+        return (getLartesia() * getGjeresia()) / 2;
     }
 }
 public class Ushtrimi5 {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Vendosni popullsine fillestare : ");
-        int popullesia = in.nextInt();
-        Popullsia popullesi = new Popullsia(popullesia);
-        System.out.println("Popullesia aktuale  :"+popullesi.nrAktual());
-        System.out.println("Dyfishi i popullesise aktuale : "+popullesi.rritNr());
-        System.out.println("10% me pak e popullsise aktuale eshte : "+popullesi.zvogeloNr(popullesia));
+        Forma forma;
+
+        Drejtkendeshi drejt = new Drejtkendeshi();
+
+        forma = drejt;
+
+        forma.setVlerat(25, 27);
+
+        System.out.println("Siperfaqja e drejtkeneshit : " + forma.getSip());
+
+        Trekendeshi trek = new Trekendeshi();
+
+        forma = trek;
+
+        forma.setVlerat(36,62);
+
+        System.out.println("Siperfaqja e trekendeshit : " + forma.getSip());
     }
 }
