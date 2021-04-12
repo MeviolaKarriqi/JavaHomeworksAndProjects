@@ -1,38 +1,37 @@
-//Ndërtoni një metodë që modifikon një Array list me stringje, duke zhvendosur të gjitha stringjet që
-//fillojnë me shkronjë të madhe në fillim, pa ndryshuar renditjen e elementëve të tjerë.
-package com.seminar7;
+//Ndërtoni një program që kërkon nga përdoruesi emrin e skedarit dhe afishon numrin e
+//karaktereve, fjalëve dhe rreshtave në skedar.
+package com.seminar8;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.lang.String;
+import java.io.*;
+
 public class Ushtrimi4 {
-
-    public static void main(String [] arg){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Sa stringje doni te vendosni : ");
-        int n = in.nextInt();
-        ArrayList<String> lista = new ArrayList(n);
-        for (int i=0; i<n; i++){
-            String s = in.next();
-            lista.add(s);
-        }
-        ArrayList<String>listaERenditur = new ArrayList<>();
-        ArrayList<String>listaERenditur2 = new ArrayList<>();
-        System.out.println(lista);
-
-        for (int i=0; i<n; i++){
-            if (lista.get(i).charAt(0)==(lista.get(i).toUpperCase().charAt(0))){
-                //listaERenditur.get(i);
-                String s = lista.get(i);
-                listaERenditur.add(s);
+    public static void main(String[] args) throws IOException
+    {
+        File skedar = new File("Ushtrimi4.txt");
+        FileInputStream shfaqjaESkedarit = new FileInputStream(skedar);
+        InputStreamReader input = new InputStreamReader(shfaqjaESkedarit);
+        BufferedReader lexuesi = new BufferedReader(input);
+        String rresht;
+        int nrRreshtash = 0;
+        int nrFjalish = 0;
+        int nrKarakteresh = 0;
+        int nrParagrafesh = 1;
+        while((rresht = lexuesi.readLine()) != null) {
+            if(rresht.equals("")) {
+                nrParagrafesh++;
             }
-            else{
-                String s = lista.get(i);
-                listaERenditur2.add(s);
+            else {
+                nrKarakteresh += rresht.length();
+                String[] listefjalesh = rresht.split("\\s+");
+
+                nrRreshtash += listefjalesh.length;
+                String[] listeFjalish = rresht.split("[!?.:]+");
+                nrFjalish += listeFjalish.length;
             }
         }
-        listaERenditur.addAll(listaERenditur2);
-        System.out.println("Lista e renditur : "+listaERenditur);
-
+        System.out.println("Numri total i fjaleve = " + nrRreshtash);
+        System.out.println("Numri total i fjalive= " + nrFjalish);
+        System.out.println("Numri total i karaktereve = " + nrKarakteresh);
+        System.out.println("Numri total i paragrafeve = " + nrParagrafesh);
     }
 }

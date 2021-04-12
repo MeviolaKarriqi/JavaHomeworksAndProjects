@@ -1,34 +1,93 @@
-//Ndërtoni një program i cili mbush një array list me vlera nga përdoruesi. Përdoruesi gjithashtu jep
-//dy indekse. Programi duhet të afishojë array listën duke hequr nga lista të gjithë elementët indeksi
-//i të cilëve është midis indeksit më të vogël të dhënë nga përdoruesi deri tek indeksi më të madh.
-package com.seminar7;
+//Ndërtoni një program që kërkon të gjithë skedarët në command line dhe afishon të gjithë rreshtat
+//që përmbajnë një fjalë të caktuar. Për shembull, nëse inputet tuaja janë
+//java Find ring report.txt address.txt Homework.java
+//atëherë programi do të afishojë
+//report.txt: has broken up an international ring of DVD bootleggers that
+//address.txt: Kris Kringle, North Pole
+//address.txt: Homer Simpson, Springfield
+//Homework.java: String filename;
+//Fjalët që kërkohen janë gjithmonë argumentet e para në command line.
+package com.seminar8;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class Ushtrimi5 {
-
-
-    public static void main(String [] args){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Sa elemente doni te perfshni ne listen e pare : ");
-        int n = in.nextInt();
-        System.out.println("Vendosni numrat : ");
-        ArrayList<Integer> a = new ArrayList(n);
-        for (int i=0; i<n; i++){
-            Integer s = in.nextInt();
-            a.add(s);
+    public static void main(String[] args) throws FileNotFoundException {
+        if (args.length < 2)
+        {
+            System.out.println(
+                    "Usage: Find keyword sourcefile1 sourcefile2 . . .");
+            return;
         }
-        System.out.println("Lista e dhene nga ju : "+a);
-        System.out.println("Vendosni indekset midis te cileve doni te fshini elemente : ");
-        ArrayList<Integer> b = new ArrayList(n);
-        int k= in.nextInt();
-        int l= in.nextInt();
-        for (int i=0; i<n; i++){
-            //a.remove(a.subList(k,l));
-            a.subList(k, l).clear();
-            b.add(i);
+        String keyword = args[0];
+        for (int i = 1; i < args.length; i++)
+        {
+            String filename = args[i];
+            FileReader reader = new FileReader(filename);
+            Scanner in = new Scanner(reader);
+
+            String line = in.nextLine();
+            while(line != null)
+            {
+
+                if(line.indexOf(keyword) != -1)
+                {
+                    System.out.println(line);
+                }
+            }
         }
-        System.out.println(b);
     }
 }
+
+
+/*
+ public static void main(String[] args) throws FileNotFoundException {
+        String input = args[0];
+        for (int i = 1; i < args.length; i++) {
+            System.out.println(" File  " + args[i]);
+            File one = new File(args[i]);
+            Scanner in = new Scanner(one);
+            while (in.hasNext()) {
+                String line = in.nextLine();
+                if (line.contains(input)) {
+                    System.out.println(line);
+                }
+            }
+        }
+    }
+ */
+
+/*
+
+ */
+
+/*
+public static void main(String[] args) throws IOException
+    {
+        if (args.length < 2)
+        {
+            System.out.println(
+                    "Usage: Find keyword sourcefile1 sourcefile2 . . .");
+            return;
+        }
+        String keyword = args[0];
+        for (int i = 1; i < args.length; i++)
+        {
+            String filename = args[i];
+            FileReader reader = new FileReader(filename);
+            Scanner in = new Scanner(reader);
+
+            String line = in.nextLine();
+            while(line != null)
+            {
+
+                if(line.indexOf(keyword) != -1)
+                {
+                    System.out.println(line);
+                }
+            }
+        }
+    }
+ */

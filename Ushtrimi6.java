@@ -1,37 +1,41 @@
-//Ndërtoni një metodë që numëron numrin e elementëve të ndryshëm në një tabelë me stringje pa
-//modifikuar arraylistën.
-package com.seminar7;
+//Ndërtoni një program që zëvendëson çdo rresht të skedarit me të anasjelltin e tij. Përshembull
+//përmbajtja e skedarit HelloPrinter.java do të ndryshonte në :
+//retnirPolleH ssalc cilbup
+//{
+//)sgra ][gnirtS(niam diov citats cilbup
+//{
+//wodniw elosnoc eht ni gniteerg a yalpsiD //
+//;)"!dlroW ,olleH"(nltnirp.tuo.metsyS
+//}
+//}
+package com.seminar8;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Ushtrimi6 {
 
-    public static Set<String> findDuplicates(int[] input) {
-        Set<String> duplicates = new HashSet<String>();
-
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 1; j < input.length; j++) {
-                if (input[i] == input[j] && i != j) {
-                    break;
-                }
-            }
-        }
-
-        return duplicates;
+    public static String ktheMbrapsht(String s){
+        return new StringBuilder(s).reverse().toString();
     }
-    public static void main (String [] args){
+
+    public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-        System.out.println("Sa stringje doni te vendosni : ");
-        int n = in.nextInt();
-        ArrayList lista = new ArrayList(n);
-        for (int i=0; i<n; i++){
-            String s = in.next();
-            lista.add(s);
+        System.out.println("Vendosni emrin e skedarit : ");
+        String emri = in.next();
+        try{
+            File skedari = new File(emri);
+            Scanner lexo = new Scanner(skedari);
+
+            while (lexo.hasNextLine()){
+                String rreshti = lexo.nextLine();
+                String s=ktheMbrapsht(rreshti);
+                System.out.println(s);
+            }
+            lexo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        LinkedHashSet<Integer> hashSet = new LinkedHashSet<>(lista);
-        ArrayList<Integer>listERe = new ArrayList<>(hashSet);
-        System.out.println("Lista e  pare pa dublikime : "+listERe);
-        int m = listERe.size();
-        System.out.println("Element  qe gjenden vetem nje here :  "+m);
     }
 }

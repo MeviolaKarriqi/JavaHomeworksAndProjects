@@ -1,57 +1,42 @@
-//Ndërtoni një metodë public static ArrayList<Integer> merge (ArrayList<Integer> a,
-//ArrayList<Integer> b), e cila bashkon dy array lista, duke alternuar elementë nga të dy arraylistat.
-//Nëse një nga arraylistat është më e vogël se tjetra, atëherë kryeni alternimet për sa kohë që është
-//e mundur dhe më pas shtoni elementët e mbetur nga array lista më e gjatë. Për shembull, nëse a
-//është 1 4 9 16 dhe b është 9 7 4 9 11 atëherë metoda do të kthejë array listën 1 9 4 7 9 4 16 9 11.
-package com.seminar7;
-
+//Ndërtoni një program që lexon një skedar tekst. Lexoni secilin rresht të skedarit dhe shkruajeni atë
+//në skedarin output të ndjekur nga numri i rreshtit. Për shembull, nëse skedari input është:
+//Mary had a little lamb
+//Whose fleece was white as snow.
+//And everywhere that Mary went,
+//The lamb was sure to go!
+//programi duhet të prodhojë skedarin output:
+///* 1 */ Mary had a little lamb
+///* 2 */ Whose fleece was white as snow.
+///* 3 */ And everywhere that Mary went,
+///* 4 */ The lamb was sure to go!
+//Kërkoni nga përdoruesi emrat e skedarëve input dhe output.
+package com.seminar8;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class Ushtrimi2 {
-
-    public static ArrayList<Integer> merge(ArrayList<Integer> a, ArrayList<Integer> b) {
-        int size = Math.max(a.size(), b.size());
-        ArrayList<Integer> ebashkuar = new ArrayList<>();
-        for(int i = 0; i < size; i++) {
-            if(i <= a.size() - 1) {
-                ebashkuar.add(a.get(i));
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Skedari Input: ");
+        String emriISkedaritInput = input.next();
+        System.out.print("Skedari output: ");
+        String emriISkedaritOutput = input.next();
+        try {
+            File skedariInput = new File(emriISkedaritInput);
+            Scanner in = new Scanner(skedariInput);
+            PrintWriter out = new PrintWriter(emriISkedaritOutput);
+            int nrRreshtit = 1;
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                out.println("/* " + nrRreshtit + " */ " + line);
+                nrRreshtit++;
             }
-            if(i <= b.size() - 1) {
-                ebashkuar.add(b.get(i));
-            }
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        return ebashkuar;
-    }
-
-    public static String ndanListen(ArrayList<Integer> ints) {
-        StringBuilder s = new StringBuilder();
-        for(int i = 0; i < ints.size(); i++)
-            s.append(ints.get(i)).append(i != ints.size() - 1 ? " " : "");
-        return s.toString();
-    }
-
-    public static void main(String [] args){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Sa elemente doni te perfshni ne listen e pare : ");
-        int n = in.nextInt();
-        ArrayList<Integer> a = new ArrayList(n);
-        for (int i=0; i<n; i++){
-            Integer s = in.nextInt();
-            a.add(s);
-        }
-
-        System.out.println("Sa elemente doni te perfshni ne listen e dyte : ");
-        int m = in.nextInt();
-        System.out.println("Vendosni numrat : ");
-        ArrayList<Integer> b = new ArrayList(n);
-        for (int i=0; i<m; i++){
-            Integer k = in.nextInt();
-            b.add(k);
-        }
-        ArrayList<Integer> merged = merge(a, b);
-        System.out.println("A: " + ndanListen(a));
-        System.out.println("B: " + ndanListen(b));
-        System.out.println("Lista e bashkuar : " + ndanListen(merged));
     }
 }
