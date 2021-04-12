@@ -1,51 +1,49 @@
-//Ndërtoni një metodë statike që kontrollon nëse dy tabela kanë të njëjtët elementë në një rradhë të
-//caktuar. Për shembull, tabelat 1 4 9 16 9 7 4 9 11 dhe 11 1 4 9 16 9 7 4 9 do të konsiderohen identike.
-//Ndërsa tabelat 1 4 9 16 9 7 4 9 11 dhe 11 11 7 9 16 4 1 4 9 nuk janë identike.
-package com.seminar6;
+//Ndërtoni një program i cili pasi lexon disa Stringje nga përdoruesi i rendit ato nga ana leksikore
+//duke i vendosur në vendin e duhur në një arraylist. Përdoruesi përcakton fundin e stringjeve
+//nëpërmjet numrit -1.
+//Për shembull nëse stringjet janë:
+//Sonja
+//Ralf
+//Tani
+//Artan
+//Atëherë arraylist duhet të rritet si më poshtë:
+//[Empy]
+//[Sonja]
+//[Ralf, Sonja]
+//[Ralf, Sonja,Tani]
+//[Artan, Ralf, Sonja,Tani]
+package com.seminar7;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+
 public class Ushtrimi8 {
-    public static void main(String[] args) {
+    public static  void main(String [] args){
+        ArrayList<String> list1=new ArrayList<>();
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Vendosni sa vlera doni qe te permbajne tabelat tuaja : ");
-        int nr = in.nextInt();
-        int [] vek1 = new int[nr];
-        System.out.println("Vendosni vlerat per te mbushur tabelen e pare: ");
-        for (int i=0; i<nr; i++){
-            vek1[i]=in.nextInt();
-        }
+        String opsioni = "-1";
+        {
+            do {
+                System.out.print("Vendosni elementin per listen e pare : ");
+                list1.add(in.next());
+                System.out.println("Ne qofte se doni te vazhdoni te shtoni elemente ne listat tuaja vendosni 'po' ne te kundert vendosni '-1': ");
+                opsioni= in.next();
+            }while (!opsioni.equals("-1"));
+            if (opsioni.equals("-1")){
+                for (int i=0; i<list1.size(); i++){
+                    list1.get(i);
+                }
+                System.out.println(list1);
 
-        int [] vek2 = new int[nr];
-        System.out.println("Vendosni vlerat per te mbushur tabelen e dyte: ");
-        for (int i=0; i<nr; i++){
-            vek2[i]=in.nextInt();
-        }
-
-
-        if (teBarabarta(vek1, vek2)) {
-            System.out.println("Te dy tabelat jane ne menyre strikte identike.");
-        } else {
-            System.out.println("Te dy tabelat nuk jane ne menyre strikte identike.");
-        }
-
-
-
-    }
-
-    public static boolean teBarabarta(int[] tab1, int[] tab2) {
-
-        if (tab1.length != tab2.length)
-            return false;
-
-
-        for (int i = 0; i < tab1.length; i++) {
-            for(int j=i; j< tab1.length; j++){
-                if (tab1[i] != tab2[i])
-                    return false;
+                Collections.sort(list1);
+                for (int i=list1.size()-1; i>0; i--){
+                    System.out.println(list1.get(i));
+                }
+                System.out.println("Lista me elementet e renditur : "+list1);
             }
-
         }
-
-        return true;
     }
 }
