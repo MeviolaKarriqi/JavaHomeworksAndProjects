@@ -1,4 +1,4 @@
 package com.com.seminar9;
 
-public class Ushtrimi6 {
+public class UshtrimTeze1 {
 }
